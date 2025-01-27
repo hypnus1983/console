@@ -27,6 +27,10 @@ interface IPreviewPDFProps {
   downloadFile: () => void;
 }
 
+interface PDFPageInfo {
+  numPages: number;
+}
+
 const PreviewPDF = ({
   path,
   loading,
@@ -113,12 +117,12 @@ const PreviewPDF = ({
         >
           <Document
             file={path}
-            onLoadSuccess={({ _pdfInfo }) => {
-              setTotalPages(_pdfInfo.numPages || 0);
+            onLoadSuccess={(pdf: PDFPageInfo) => {
+              setTotalPages(pdf.numPages || 0);
               setErrorState(false);
               onLoad();
             }}
-            onLoadError={(error) => {
+            onLoadError={(error: Error) => {
               setErrorState(true);
               onLoad();
               console.error(error);
@@ -127,10 +131,9 @@ const PreviewPDF = ({
             {arrayCreate.map((item) => (
               <Page
                 pageNumber={item + 1}
-                key={`render-page-${item}`}
+                key={`page_${item + 1}`}
                 renderAnnotationLayer={false}
                 renderTextLayer={false}
-                renderForms={false}
               />
             ))}
           </Document>

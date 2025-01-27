@@ -49,7 +49,7 @@ const rootReducer = combineReducers({
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(objectBrowserWSMiddleware(objectsWS)),
+    getDefaultMiddleware().concat(objectBrowserWSMiddleware(objectsWS!)),
 });
 
 if (process.env.NODE_ENV !== "production" && module.hot) {

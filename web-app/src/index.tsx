@@ -15,22 +15,16 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import MainRouter from "./MainRouter";
-import StyleHandler from "./StyleHandler";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
-);
-
-root.render(
+ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <StyleHandler>
-        <MainRouter />
-      </StyleHandler>
+      <MainRouter />
     </Provider>
   </React.StrictMode>,
+  document.getElementById("root")
 );
